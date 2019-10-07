@@ -58,28 +58,75 @@ const runners = [
 // ==== Challenge 1: Use .forEach() ====
 // The event director needs both the first and last names of each runner for their running bibs. Combine both the first and last names and populate a new array called `fullNames`. This array will contain just strings.
 let fullNames = [];
+
+runners.forEach(element => {
+  fullNames.push(element.first_name+" "+element.last_name);
+})
+
 console.log(fullNames);
 
 // ==== Challenge 2: Use .map() ====
 // The event director needs to have all the runners' first names in uppercase because the director BECAME DRUNK WITH POWER. Populate an array called `firstNamesAllCaps`. This array will contain just strings.
 let firstNamesAllCaps = [];
+
+firstNamesAllCaps.push(runners.map(name => name.first_name.toUpperCase()))
+
 console.log(firstNamesAllCaps);
 
 // ==== Challenge 3: Use .filter() ====
 // The large shirts won't be available for the event due to an ordering issue. We need a filtered version of the runners array, containing only those runners with large sized shirts so they can choose a different size. This will be an array of objects.
 let runnersLargeSizeShirt = [];
+
+runnersLargeSizeShirt.push(runners.filter(shirtSize => shirtSize.shirt_size==="L"))
+
 console.log(runnersLargeSizeShirt);
 
 // ==== Challenge 4: Use .reduce() ====
 // The donations need to be tallied up and reported for tax purposes. Add up all the donations and save the total into a ticketPriceTotal variable.
 let ticketPriceTotal = 0;
+
+ticketPriceTotal = runners.reduce((acc, runner) => acc+ runner.donation,0);
+
 console.log(ticketPriceTotal);
 
 // ==== Challenge 5: Be Creative ====
 // Now that you have used .forEach(), .map(), .filter(), and .reduce().  I want you to think of potential problems you could solve given the data set and the 5k fun run theme.  Try to create and then solve 3 unique problems using one or many of the array methods listed above.
 
 // Problem 1
+// Let's find the total of all donations over $200
+
+let bigDonors=[];
+let bigDonationTotal=0;
+
+bigDonors=(runners.filter(bigDonation=> bigDonation.donation>200))
+console.log(bigDonors);
+
+console.log(bigDonors);
+
+bigDonationTotal = bigDonors.reduce((acc, bigDonor) => acc + bigDonor.donation, 0);
+
+console.log(bigDonationTotal);
 
 // Problem 2
+// Let's put all of the names of people who donated more than $100 on a poster
+
+let mediumDonors=[];
+let mediumFullNames=[];
+mediumDonors=(runners.filter(mediumDonation=> mediumDonation.donation>=100))
+console.log(mediumDonors)
+mediumDonors.forEach(element => {
+  mediumFullNames.push(element.first_name + " " + element.last_name);
+})
+
+console.log(mediumFullNames)
 
 // Problem 3
+// Let's state the name and amount for each person who donated more than $250
+let biggestDonors=[];
+let biggestThanks=[];
+biggestDonors=runners.filter(biggestDonation=> biggestDonation.donation>=250);
+biggestDonors.forEach(element => {
+  biggestThanks.push(`Special thanks to ${element.first_name} ${element.last_name} for donating ${element.donation}`);
+})
+
+console.log(biggestThanks)
